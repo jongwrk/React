@@ -27,26 +27,32 @@
   ></script>
 
   <script type="text/babel">
-    function App() {
+    function TimeConverter() {
       const [min, setMin] = React.useState();
       const [hour, setHour] = React.useState();
+      const [isFlip, setIsFlip] = React.useState(true);
 
       function onChange(event) {
-        const newMin = event.target.value;
-        const newHour = Math.round(newMin / 60);
+        const newTime = event.target.value;
 
-        setMin(newMin);
-        setHour(newHour);
+        setMin(isFlip ? newTime : newTime * 60);
+        setHour(
+          isFlip ? Math.round(newTime / 60) : newTime,
+        );
       }
 
-      function reset() {
+      function clickReset() {
         setMin("");
         setHour("");
       }
 
+      function clickFlip() {
+        clickReset();
+        setIsFlip((current) => !current);
+      }
+
       return (
         <div>
-          <h1 className="h1">Super Converter</h1>
           <div>
             <label htmlFor="min">Minutes</label>
             <input
@@ -55,19 +61,105 @@
               placeholder="Minutes"
               value={min}
               onChange={onChange}
+              disabled={!isFlip}
             />
           </div>
           <div>
-            <label htmlFor="hour">Minutes</label>
+            <label htmlFor="hour">Hours</label>
             <input
               id="hour"
               type="number"
               placeholder="Hours"
               value={hour}
-              disabled
+              onChange={onChange}
+              disabled={isFlip}
             />
           </div>
-          <button onClick={reset}>Reset</button>
+          <button onClick={clickReset}>Reset</button>
+          <button onClick={clickFlip}>
+            Mode: {isFlip ? "Converter" : "Inverter"}
+          </button>
+        </div>
+      );
+    }
+
+    function DistanceConverter() {
+      const [amount, setAmount] = React.useState("");
+      const [isFlip, setIsFlip] = React.useState(true);
+
+      function onChange(event) {
+        const newAmount = event.target.value;
+
+        setAmount(newAmount);
+      }
+
+      function clickReset() {
+        setAmount("");
+      }
+
+      function clickFlip() {
+        clickReset();
+        setIsFlip((current) => !current);
+      }
+
+      return (
+        <div>
+          <div>
+            <label htmlFor="km">Killometers</label>
+            <input
+              id="km"
+              type="number"
+              placeholder="Killometers"
+              value={isFlip ? amount : amount * 1.609}
+              onChange={onChange}
+              disabled={!isFlip}
+            />
+          </div>
+          <div>
+            <label htmlFor="mile">Miles</label>
+            <input
+              id="mile"
+              type="number"
+              placeholder="Miles"
+              value={isFlip ? amount * 0.621 : amount}
+              onChange={onChange}
+              disabled={isFlip}
+            />
+          </div>
+          <button onClick={clickReset}>Reset</button>
+          <button onClick={clickFlip}>
+            Mode: {isFlip ? "Converter" : "Inverter"}
+          </button>
+        </div>
+      );
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState("0");
+
+      function onChange(event) {
+        const newIndex = event.target.value;
+        setIndex((current) => (current = newIndex));
+      }
+
+      return (
+        <div>
+          <h1 className="h1">Super Converter</h1>
+          <h3>
+            Mode:{" "}
+            {index === "0"
+              ? "Mintes to Hours"
+              : "Km to Miles"}
+          </h3>
+          <select value={index} onChange={onChange}>
+            <option value="0">Time</option>
+            <option value="1">Distance</option>
+          </select>
+          {index === "0" ? (
+            <TimeConverter />
+          ) : (
+            <DistanceConverter />
+          )}
         </div>
       );
     }
