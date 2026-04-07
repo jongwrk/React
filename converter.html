@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script
+    crossorigin
+    src="https://unpkg.com/react@18/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/@babel/standalone/babel.min.js"
+  ></script>
+
+  <script type="text/babel">
+    function App() {
+      const [min, setMin] = React.useState();
+      const [hour, setHour] = React.useState();
+
+      function onChange(event) {
+        const newMin = event.target.value;
+        const newHour = Math.round(newMin / 60);
+
+        setMin(newMin);
+        setHour(newHour);
+      }
+
+      function reset() {
+        setMin("");
+        setHour("");
+      }
+
+      return (
+        <div>
+          <h1 className="h1">Super Converter</h1>
+          <div>
+            <label htmlFor="min">Minutes</label>
+            <input
+              id="min"
+              type="number"
+              placeholder="Minutes"
+              value={min}
+              onChange={onChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="hour">Minutes</label>
+            <input
+              id="hour"
+              type="number"
+              placeholder="Hours"
+              value={hour}
+              disabled
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+        </div>
+      );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
