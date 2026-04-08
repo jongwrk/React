@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script
+    crossorigin
+    src="https://unpkg.com/react@18/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/@babel/standalone/babel.min.js"
+  ></script>
+
+  <script type="text/babel">
+    function MyButton({ text, onClick }) {
+      console.log(`${text} was changes`);
+
+      return (
+        <button
+          onClick={onClick}
+          style={{
+            color: "white",
+            backgroundColor: "red",
+            border: 0,
+            borderRadius: 10,
+            padding: "8px",
+          }}
+        >
+          {text}
+        </button>
+      );
+    }
+
+    function App() {
+      const [value, setValue] = React.useState(true);
+
+      function onClick() {
+        setValue((current) => !current);
+      }
+
+      return (
+        <div>
+          <MyButton
+            text={value ? "Save Changes" : "Invert Changes"}
+            onClick={onClick}
+          />
+          <MyButton text="Continue" />
+        </div>
+      );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
