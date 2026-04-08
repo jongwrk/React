@@ -46,6 +46,8 @@
       );
     }
 
+    const MemoButton = React.memo(MyButton);
+
     function App() {
       const [value, setValue] = React.useState(true);
 
@@ -55,11 +57,11 @@
 
       return (
         <div>
-          <MyButton
+          <MemoButton
             text={value ? "Save Changes" : "Invert Changes"}
             onClick={onClick}
           />
-          <MyButton text="Continue" />
+          <MemoButton text="Continue" />
         </div>
       );
     }
