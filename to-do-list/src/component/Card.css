@@ -1,8 +1,6 @@
 .card {
   display: flex;
   gap: 16px;
-  align-items: start;
-  width: 90%;
   padding: 32px;
   background: #fff;
   border-radius: 12px;

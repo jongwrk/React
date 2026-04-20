@@ -4,6 +4,7 @@ import "./Card.css";
 import { Link } from "react-router-dom";
 
 function Card({
+  id,
   thumbnail,
   title,
   rating,
@@ -12,7 +13,7 @@ function Card({
   summary,
 }) {
   return (
-    <Link to="/detail">
+    <Link to={`/detail/${id}`}>
       <div className="card">
         <img src={thumbnail} alt={title} />
         <div>
@@ -32,6 +33,7 @@ function Card({
 }
 
 Card.propTypes = {
+  id: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,

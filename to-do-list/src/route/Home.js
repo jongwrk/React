@@ -39,11 +39,13 @@ function Home() {
       return;
     }
 
-    const data = await response.json();
+    const object = await response.json();
 
-    setMovieCount(data.data.movie_count);
-    setMovieList(data.data.movies);
-    setLastPage(Math.round(data.data.movie_count / LIMIT));
+    setMovieCount(object.data.movie_count);
+    setMovieList(object.data.movies);
+    setLastPage(
+      Math.round(object.data.movie_count / LIMIT),
+    );
     setIsLoading(false);
   }
 
@@ -88,6 +90,7 @@ function Home() {
             {movieList.map((movie) => (
               <Card
                 key={movie.id}
+                id={movie.id}
                 thumbnail={movie.medium_cover_image}
                 title={movie.title_long}
                 rating={movie.rating}
