@@ -2,6 +2,9 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+//
 import Layout from "./component/layout";
 import Home from "./route/home";
 import Profile from "./route/profile";
@@ -33,12 +36,21 @@ const router = createBrowserRouter([
   },
 ]);
 
+const GlobalStyle = createGlobalStyle`
+  ${reset};
+  body{
+  background-color: black;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  }
+`;
+
 function App() {
   return (
-    <div>
-      <div>Hello world!</div>
+    <>
+      <GlobalStyle />
       <RouterProvider router={router} />
-    </div>
+    </>
   );
 }
 
