@@ -29,6 +29,7 @@ export const Input = styled.input`
   border: none;
   width: 100%;
   font-size: 16px;
+  font-weight: bold;
 
   &[type="submit"] {
     cursor: pointer;
@@ -49,8 +50,26 @@ export const Error = styled.span`
 
 export const Switcher = styled.span`
   text-align: center;
-  margin-top: 20px;
   a {
     color: #1d9bf0;
   }
+`;
+
+export const Button = styled.span`
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 0;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  cursor: pointer;
+`;
+
+export const Logo = styled.img`
+  height: 24px;
 `;

@@ -9,7 +9,6 @@ import {
   type SubmitEvent,
 } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AUTH } from "../firebase";
 //
 import { ERROR_CODE } from "../common/error";
 import {
@@ -19,8 +18,10 @@ import {
   Switcher,
   Title,
   Wrapper,
-} from "../component/auth";
-import Loading from "../component/loading";
+} from "../component/Auth.style";
+import GithubButton from "../component/GithubButton";
+import Loading from "../component/Loading";
+import { AUTH } from "../firebase";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -167,6 +168,7 @@ function SignUp() {
           Already have an Account?{" "}
           <Link to="/login">Log in ➡️</Link>
         </Switcher>
+        <GithubButton />
       </Form>
       {error !== "" ? <Error>{error}</Error> : null}
     </Wrapper>

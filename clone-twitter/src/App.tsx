@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -8,15 +7,12 @@ import styled, {
 } from "styled-components";
 import reset from "styled-reset";
 //
-import Layout from "./component/layout";
-import Loading from "./component/loading";
-import Home from "./route/home";
-import Login from "./route/login";
-import Profile from "./route/profile";
-import SignUp from "./route/signup";
-//
-import Guard from "./component/guard.tsx";
-import { AUTH } from "./firebase.ts";
+import Guard from "./component/Guard.tsx";
+import Layout from "./component/Layout.tsx";
+import Home from "./route/Home.tsx";
+import Login from "./route/Login.tsx";
+import Profile from "./route/Profile.tsx";
+import SignUp from "./route/Signup.tsx";
 
 const router = createBrowserRouter([
   {
@@ -63,26 +59,10 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  async function initAuth() {
-    // wait for firebase
-    await AUTH.authStateReady();
-    setIsLoading(false);
-  }
-
-  useEffect(() => {
-    initAuth();
-  }, []);
-
   return (
     <Wrapper>
       <GlobalStyle />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <RouterProvider router={router} />
-      )}
+      <RouterProvider router={router} />
     </Wrapper>
   );
 }
